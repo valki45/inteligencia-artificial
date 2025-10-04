@@ -1,0 +1,91 @@
+# Tarea: Implementación de la función OR (O Inclusiva) con una sola neurona.
+
+# --- 1. Explicación de lo que hace la neurona (Tus Palabras) ---
+"""
+La neurona OR funciona como un detector de activación: 
+Solo se necesita al menos un '1' en la entrada para que se encienda.
+
+La clave es el peso POSITIVO (1.0) en ambas entradas y el Bias NEGATIVO (-0.5).
+El Bias actúa como una pequeña "barrera" que la suma debe superar.
+Con (0, 0), la suma es -0.5, no supera la barrera, y la salida es 0.
+Con cualquier otro caso (0, 1), (1, 0), (1, 1), la suma es positiva (0.5 o 1.5)
+y la neurona se activa con una salida de 1.
+"""
+# --- 2. Definición de Entradas ---
+entradas = [
+    (0, 0),  
+    (0, 1),  
+    (1, 0),  
+    (1, 1)   
+]
+
+# --- 3. Parámetros de la Neurona ---
+peso_1 = 1.0
+peso_2 = 1.0
+bias = -0.5
+
+# --- 4. Ejecución del Modelo ---
+print("--- NEURONA OR ---")
+print("Entradas | Suma | Salida")
+print("-" * 25)
+
+for x1, x2 in entradas:
+    
+    # Cálculo: w1*x1 + w2*x2 + b
+    suma_ponderada = (peso_1 * x1) + (peso_2 * x2) + bias
+    
+    # Activación: Si la suma supera o iguala a 0, la salida es 1.
+    if suma_ponderada >= 0:
+        salida = 1
+    else:
+        salida = 0
+    
+    print(f" ({x1}, {x2})   | {suma_ponderada:.1f}  |   {salida}")
+
+
+
+
+
+
+
+# Tarea: Implementación de la función NOT (Negación) con una sola neurona.
+
+# --- 1. Explicación de lo que hace la neurona (Tus Palabras) ---
+"""
+La neurona NOT funciona como un inversor de señal. 
+
+La clave es el Bias POSITIVO (0.5) y el Peso NEGATIVO (-1.0).
+El Bias positivo le da una tendencia natural a estar encendida (salida 1).
+Cuando la entrada es 0, la neurona se activa (0.5 >= 0) -> Salida 1.
+
+Si la entrada es 1, el Peso NEGATIVO de -1.0 cancela la activación del Bias.
+La suma es -1.0(1) + 0.5 = -0.5.
+Como la suma es negativa (-0.5 < 0), la neurona se apaga -> Salida 0.
+"""
+
+# --- 2. Definición de Entradas ---
+entradas = [0, 1]
+
+# --- 3. Parámetros de la Neurona ---
+# Peso: Debe ser negativo para que funcione como inhibidor.
+peso_1 = -1.0
+# Bias: Debe ser positivo para que se active por defecto.
+bias = 0.5
+
+# --- 4. Ejecución del Modelo ---
+print("--- NEURONA NOT ---")
+print(" Entrada | Suma | Salida")
+print("-" * 25)
+
+for x1 in entradas:
+    
+    # Cálculo: w1*x1 + b
+    suma_ponderada = (peso_1 * x1) + bias
+    
+    # Activación: Si la suma supera o iguala a 0, la salida es 1.
+    if suma_ponderada >= 0:
+        salida = 1
+    else:
+        salida = 0
+    
+    print(f"    {x1}    | {suma_ponderada:.1f}  |   {salida}")
